@@ -38,8 +38,9 @@ export default class discussions extends Component {
         </div>
         <div className="hidden md:flex flex-col items-center">
           <div className="text-center text-[#ff3e79] font-semibold text-lg">Mes discussions</div>
-          <div className="">
-            
+          <div className="border-2">
+            <div className=""></div>
+            <div className=""></div>
           </div>
         </div>
         <Footer></Footer>

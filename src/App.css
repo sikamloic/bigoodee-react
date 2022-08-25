@@ -50,7 +50,7 @@
     right: 5%
   }
   .right1{
-    right: 9%
+    right: 10%
   }
 }
 
@@ -62,3 +62,28 @@
     right: 15%
   }
 }
+
+ion-content {
+  --background: #ff3e79;
+}
+
+@keyframes scale-up-center {
+  100% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+  }
+  0% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+}
+.container {
+  -webkit-animation: scale-in-center 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: scale-in-center 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animation {
+  animation: scale-up-center 1s ease-in-out 0s alternate-reverse;
+}
+

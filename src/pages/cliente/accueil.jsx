@@ -20,7 +20,7 @@ export default class accueil extends Component {
               <div className="">
                 <img src={require('../../assets/nadia.svg').default} alt="" />
                 <p className="text-sm text-black font-semibold">Nadia</p>
-                <Rating value="5" />
+                <Rating value={5} />
               </div>
               <div className="text-start">
                 très gentille, 

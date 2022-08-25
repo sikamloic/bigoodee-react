@@ -1,13 +1,44 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 
 
-export function SubVille({check, sub}){
+export function SubVille({check, sub, onGetSubVille}){
+  const [tabs, setTabs] = useState(sub)
+  function select(tab, index){
+    tab[index].check = !tab[index].check;
+    setTabs([...tab]);
+    let i = index + 1;
+    while(i !== index){
+      if(i === tab.length){
+        i = 0;
+      }
+      if(i > index && i < tab.length){
+        for(let j = i; j <= tab.length - 1; j++){
+          tab[j].check = false;
+          setTabs([...tab]);
+        }
+        i = 0;
+      }
+      if(i < index){
+        for(let j = i; j < index; j++){
+          tab[j].check = false;
+          setTabs([...tab]);
+          i = j + 1;
+        }
+      }
+    }
+    if(tab[index].check === true){
+      onGetSubVille(tab[index].nom);
+    }
+    else{
+      onGetSubVille("");
+    }
+  }
   if(check === true && sub.length !== 0){
     return(
       <div className="space-y-2">
         {
-          sub.map((item, i, tab) =>
-            <div className="border-2 px-2 flex justify-between items-center py-1 rounded-md text-sm cursor-pointer bg-[#E0E0E0]">
+          tabs.map((item, i, tab) =>
+            <div key={item.nom} className="border-2 px-2 flex justify-between items-center py-1 rounded-md text-sm cursor-pointer bg-[#E0E0E0]" onClick={() => select(tab, i)}>
               <div className="flex items-center space-x-2">
                 <img src={require('../assets/hair.svg').default} alt="" />
                 <div className="">{item.nom}</div>
@@ -59,21 +90,61 @@ export default class choixVille extends Component {
           check: false,
           sub: []
         },
-      ]
+      ],
+      ville: ""
+    }
+    this.getSubVille = this.getSubVille.bind(this)
+  }
+
+  select(tab, index){
+    tab[index].check = !tab[index].check;
+    this.setState({
+      items: tab
+    });
+    let i = index + 1;
+    while(i !== index){
+      if(i === tab.length){
+        i = 0;
+      }
+      if(i > index && i < tab.length){
+        for(let j = i; j <= tab.length - 1; j++){
+          tab[j].check = false;
+          this.setState({
+            items: tab
+          });
+        }
+        i = 0;
+      }
+      if(i < index){
+        for(let j = i; j < index; j++){
+          tab[j].check = false;
+          this.setState({
+            items: tab
+          });
+          i = j + 1;
+        }
+      }
+    }
+    if(tab[index].sub.length === 0 && tab[index].check === true){
+      this.setState({
+        ville: tab[index].nom
+      })
+    }
+    else{
+      this.setState({
+        ville: ""
+      })
     }
   }
 
-  change(tab,i){
-    tab[i].check = !tab[i].check
+  getSubVille(nom){
     this.setState({
-      items: tab
+      ville: nom
     })
-    // if(tab[i].sub.length === 0){
-    //   this.props.onGetPrestation(tab[i].nom)
-    // }
   }
 
   valider(){
+    this.props.onGetVille(this.state.ville)
     this.props.onClose()
   }
 
@@ -86,8 +157,8 @@ export default class choixVille extends Component {
           <div className="space-y-3">
             {
               this.state.items.map((item, i, tab) =>
-                  <div className="">
-                    <div className="border-2 px-2 flex justify-between items-center py-1 rounded-md cursor-pointer mb-1" onClick={() => this.change(tab, i)}>
+                  <div className="" key={item.nom}>
+                    <div className="border-2 px-2 flex justify-between items-center py-1 rounded-md cursor-pointer mb-1" onClick={() => this.select(tab, i)}>
                       <div className="flex items-center space-x-2">
                         <img src={require('../assets/hair.svg').default} alt="" />
                         <div className="">{item.nom}</div>
@@ -95,7 +166,7 @@ export default class choixVille extends Component {
                       <img src={item.check ? `${require('../assets/check-off-pink.svg').default}`:`${require('../assets/check-on-pink.svg').default}` } alt="" />
                     </div>
                     <div className="">
-                      <SubVille check={item.check} sub={item.sub}></SubVille>
+                      <SubVille check={item.check} sub={item.sub} onGetSubVille={this.getSubVille}></SubVille>
                     </div>
                   </div>
                 )

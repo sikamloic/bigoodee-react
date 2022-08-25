@@ -11,7 +11,7 @@ export default class resultats extends Component {
       <div>
         <Header back="true"></Header>
         <div className="px-5 text-gray-600 mt-10 space-y-10 mb-5 flex flex-col lg:flex-row items-center lg:justify-around">
-          <form className="border-2 rounded-md space-y-5 flex flex-col items-center p-2 md:w-72">
+          <form className="border-2 rounded-md space-y-5 flex flex-col items-center p-2 w-full md:w-72">
             <TextField 
               label="choix de la ville"
               type="button"
@@ -48,8 +48,8 @@ export default class resultats extends Component {
             </div>
             <div className='space-y-5 md:space-y-0 md:grid grid-cols-2 gap-4'>
               {
-                this.items.map(()=>
-                  <div className="border-2 rounded-md relative z-50 px-2 pt-1 pb-3">
+                this.items.map((item)=>
+                  <div key={item} className="border-2 rounded-md relative px-2 pt-1 pb-3">
                     <div className="absolute -top-3 border-2 rounded-md pt-0.5 bg-white ">
                       <img src={require('../../assets/nadia.svg').default} alt="" className="w-full" />
                     </div>

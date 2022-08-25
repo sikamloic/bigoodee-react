@@ -4,6 +4,7 @@ import Footer from '../../components/footer';
 import { Rating } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { NavLink } from 'react-router-dom';
 
 export default class infosCoiffeuse extends Component {
   render() {
@@ -22,14 +23,16 @@ export default class infosCoiffeuse extends Component {
                   <img src={require('../../assets/localisation.svg').default} alt="" className='w-5' />
                   <div className="">Nantes</div>
                 </div>
-                <Rating value = "5" size="small"></Rating>
+                <Rating value = {5} size="small"></Rating>
                 <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] bg-opacity-40 rounded-md"><img src={require('../../assets/coeur-orange.svg').default} alt="" /></div>
                 <div className="">se déplace</div>
                 <div className="">à domicile</div>
                 <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FF3E79] bg-opacity-40 rounded-md uppercase">avis</div>
               </div>
               <div className="grid grid-cols-12 bg-white gap-4 pt-3 px-2">
-                <div className="col-span-4 cursor-pointer flex justify-center items-center h-10 w-16 bg-[#FF3E79] bg-opacity-40 rounded-md"><img src={require('../../assets/messages-pink.svg').default} alt="" /></div>
+                <NavLink className="col-span-4 cursor-pointer flex justify-center items-center h-10 w-16 bg-[#FF3E79] bg-opacity-40 rounded-md" to="/discussions">
+                  <img src={require('../../assets/messages-pink.svg').default} alt="" />
+                </NavLink>
                 <div className="col-span-8 bg-[#FF3E79] h-10 uppercase rounded-md text-white flex justify-center items-center text-sm cursor-pointer">réserver la prestation</div>
               </div>
             </div>
@@ -74,19 +77,19 @@ export default class infosCoiffeuse extends Component {
               <div className="bg-[#FFB156] rounded-lg pl-2 border-2 h-12 cursor-pointer">
                 <div className="bg-white flex justify-between items-center px-2 h-full">
                   <div className="text-[#FF3E79] uppercase text-sm">tissages</div>
-                  <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FFB156] font-semibold text-lg bg-opacity-40 rounded-md uppercase">40 €</div>
+                  <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FFB156] font-semibold text-lg bg-opacity-10 rounded-md uppercase">40 €</div>
                 </div>
               </div>
               <div className="bg-[#FFB156] rounded-lg pl-2 border-2 h-12 cursor-pointer">
                 <div className="bg-white flex justify-between items-center px-2 h-full">
                   <div className="text-[#FF3E79] uppercase text-sm">tresses pour enfants</div>
-                  <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FFB156] font-semibold text-lg bg-opacity-40 rounded-md uppercase">40 €</div>
+                  <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FFB156] font-semibold text-lg bg-opacity-10 rounded-md uppercase">40 €</div>
                 </div>
               </div>
               <div className="bg-[#FFB156] rounded-lg pl-2 border-2 h-12 cursor-pointer">
                 <div className="bg-white flex justify-between items-center px-2 h-full">
                   <div className="text-[#FF3E79] uppercase text-sm">tissages</div>
-                  <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FFB156] font-semibold text-lg bg-opacity-40 rounded-md uppercase">40 €</div>
+                  <div className="cursor-pointer flex justify-center items-center h-8 w-16 bg-[#FF3E79] text-[#FFB156] font-semibold text-lg bg-opacity-10 rounded-md uppercase">40 €</div>
                 </div>
               </div>
             </div>

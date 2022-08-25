@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Tabs, Tab, TextField, InputAdornment, Modal, Fade, Backdrop} from '@mui/material';
 import ChoixPrestation from './choixPrestation.jsx';
 import ChoixVille from './choixVille.jsx';
+import ChoixDate from './choixDate.jsx';
 import {Link} from 'react-router-dom';
 
 export default class banner extends Component {
@@ -12,8 +13,10 @@ export default class banner extends Component {
       value : 0,
       open: false,
       open2: false,
+      open3: false,
       Prestation: "",
-      Ville: ""
+      Ville: "",
+      Date: ""
     }
     this.getPrestation = this.getPrestation.bind(this)
     this.getVille = this.getVille.bind(this)
@@ -75,8 +78,7 @@ export default class banner extends Component {
                 <TextField
                   className='text-start text-gray-600' 
                   label="type de prestation"
-                  type="text"
-                  disabled
+                  type="button"
                   variant="outlined"
                   fullWidth
                   value={this.state.Prestation}
@@ -101,10 +103,22 @@ export default class banner extends Component {
                   type="button"
                   variant="outlined"
                   fullWidth
+                  onClick={() => {this.setState({open3: true})}}
                   InputProps={{
                     endAdornment: (<InputAdornment position="start"><img src={require('../assets/arrow-down-pink2.svg').default} alt="" /></InputAdornment>),
                   }}
                 />
+                <Modal 
+                  open={this.state.open3}
+                  onClose={() => {this.setState({open3: false})}}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 50,
+                  }}
+                >
+                  <Fade in={this.state.open3}><div><ChoixDate onClose = {() => {this.setState({open3: false})}}></ChoixDate></div></Fade>
+                </Modal>
               </div>
               <div className={`${this.state.value === 1 ? 'grid grid-cols-2 gap-4 place-items-center text-gray-600 text-xs max-h-[250px] overflow-scroll':'hidden'}`}>
                   <div className="">

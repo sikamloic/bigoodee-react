@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Avatar } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 export default class coiffeusesPreferees extends Component {
   render() {
@@ -12,7 +13,7 @@ export default class coiffeusesPreferees extends Component {
             <div className="hidden md:block text-center">Contactez en toutes sécurité vos coiffeuses préférées et réserver une réservation.</div>
           </div>
           <div className="space-y-2">
-            <div className="flex justify-between items-center px-2 py-1 bg-white rounded-md w-full border-2 cursor-pointer">
+            <NavLink className="flex justify-between items-center px-2 py-1 bg-white rounded-md w-full border-2 cursor-pointer" to="/infos-coiffeuse">
               <div className="flex space-x-2 items-center">
                 <Avatar src={require('../assets/pp.svg').default}></Avatar>
                 <div className="">
@@ -24,8 +25,8 @@ export default class coiffeusesPreferees extends Component {
                 </div>
               </div>
               <div className="flex justify-center items-center bg-[#FFB156] bg-opacity-10 rounded-md py-1 px-2"><img src={require('../assets/healt-full-orange.svg').default} alt="" /></div>
-            </div>
-            <div className="flex justify-between items-center px-2 py-1 bg-white rounded-md w-full border-2 cursor-pointer">
+            </NavLink>
+            <NavLink className="flex justify-between items-center px-2 py-1 bg-white rounded-md w-full border-2 cursor-pointer" to="/infos-coiffeuse">
               <div className="flex space-x-2 items-center">
                 <Avatar src={require('../assets/pp.svg').default}></Avatar>
                 <div className="">
@@ -37,7 +38,7 @@ export default class coiffeusesPreferees extends Component {
                 </div>
               </div>
               <div className="flex justify-center items-center bg-[#FFB156] bg-opacity-10 rounded-md py-1 px-2"><img src={require('../assets/healt-full-orange.svg').default} alt="" /></div>
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>

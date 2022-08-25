@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css'
 import Button from '@mui/material/Button'
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 export default class header extends Component {
   menu1 = [
@@ -13,12 +13,12 @@ export default class header extends Component {
   ];
   menu2 = ["devenir coiffeuse", "Boutique", "Nos coiffures", "où nous trouver ?", "besoin d’aide ?"];
   menu3 = [
-    {nom: "Mon historique", img: require('../assets/historique.svg').default},
-    {nom: "Mes messages", img: require('../assets/messages.svg').default},
-    {nom: "Inviter des amis", img: require('../assets/iniviter-des-amis.svg').default},
-    {nom: "Questions fréquentes", img: require('../assets/aide.svg').default},
-    {nom: "Nous contacter", img: require('../assets/nous-contacter.svg').default},
-    {nom: "Paramètres", img: require('../assets/parametres.svg').default},
+    {nom: "Mon historique", img: require('../assets/historique.svg').default, to: "cliente/historique"},
+    {nom: "Mes messages", img: require('../assets/messages.svg').default, to: "cliente/messages"},
+    {nom: "Inviter des amis", img: require('../assets/iniviter-des-amis.svg').default, to: "cliente/inviter-des-amis"},
+    {nom: "Questions fréquentes", img: require('../assets/aide.svg').default, to: "cliente/historique"},
+    {nom: "Nous contacter", img: require('../assets/nous-contacter.svg').default, to: "cliente/nous-contacter"},
+    {nom: "Paramètres", img: require('../assets/parametres.svg').default, to: "cliente/parametres"},
   ];
   logo = ""
   menu = ""
@@ -54,6 +54,11 @@ export default class header extends Component {
     }
   }
 
+  // back(){
+  //   let location = Location;
+  //   location.
+  // }
+
   render() {
     return (
       <div className=''>
@@ -65,22 +70,24 @@ export default class header extends Component {
             <div className={`${this.props.back === 'true' ? '-ml-7':'hidden'}`}>
               <img src={require('../assets/arrow-left-pink.svg').default} alt="" className="" />
             </div>
-            <img src={this.changeLogo(this.props.color)} alt="" className={`${this.props.color === "rose" ? 'pl-5 w-32':''} ${this.props.back === "true" ? 'invisible':''}`} />
+            <NavLink to="/">
+              <img src={this.changeLogo(this.props.color)} alt="" className={`${this.props.color === "rose" ? 'pl-5 w-32':''} ${this.props.back === "true" ? 'invisible':''}`} />
+            </NavLink>
             <Button onClick={() => this.show()}>
             <img src={this.changeMenu(this.props.color)} alt="" className="" />
             </Button>
           </div>
-          <div className={this.state.show ? 'absolute w-11/12 left-4 top-1 pb-3 rounded-lg shadow-md z-[1000] bg-white':'hidden'}>
+          <div className={this.state.show ? 'animation absolute w-11/12 left-4 top-1 pb-3 rounded-lg shadow-md z-[1000] bg-white':'hidden'}>
             <div className='relative'>
               <img src={require('../assets/close.svg').default} alt="fermer" className='absolute top-2 right-5' onClick={() => this.show()} />
               <div className='flex justify-center items-center pt-3'>
                 <img src={require('../assets/avatar.svg').default} alt="avatar" />
               </div>
               <div className='border-[1px] border-[#FF3E79] my-3'></div>
-              <div className='space-y-2 flex flex-col text-gray-600'>
+              <div className='space-y-2 hidden flex-col text-gray-600'>
                 {
                   this.menu1.map((item, i) =>
-                    <div className={`${i===4 ? 'bg-[#FF3E79] text-white uppercase rounded-md':''} flex space-x-5 px-3 py-1 w-64 items-center ml-8 `}>
+                    <div key={item.nom} className={`${i===4 ? 'bg-[#FF3E79] text-white uppercase rounded-md':''} flex space-x-5 px-3 py-1 w-64 items-center ml-8 `}>
                       <img src={item.img} alt="" className='hover:opcity-100' />
                       <div>{item.nom}</div>
                     </div>
@@ -92,13 +99,13 @@ export default class header extends Component {
                   <Link className="uppercase text-[#ff3e79]" to="/connexion">se connecter</Link>
                 </div>
               </div>
-              <div className='space-y-2 hidden flex-col text-gray-600'>
+              <div className='space-y-2 flex flex-col text-gray-600'>
                 {
                   this.menu3.map(item =>
-                    <div className={` flex space-x-5 px-3 py-1 w-64 pl-10 items-center`}>
+                    <NavLink key={item.nom} className={` flex space-x-5 px-3 py-1 w-64 pl-10 items-center`} to={"/" + item.to}>
                       <img src={item.img} alt="" className='hover:opcity-100' />
                       <div>{item.nom}</div>
-                    </div>
+                    </NavLink>
                   )
                 }
                 <div className='border-[1px] border-[#FF3E79] my-3'></div>
@@ -112,9 +119,9 @@ export default class header extends Component {
         </div>
         <div className='hidden md:block md:space-y-4'>
           <div className="bg-[#FF3E79] flex justify-between md:px-5 lg:px-16 items-center">
-            <div className="">
+            <NavLink className="" to="/">
               <img src={require('../assets/bigoodeeBlanc.svg').default} alt="" />
-            </div>
+            </NavLink>
             <div className="flex flex-col items-end space-y-2">
               <Link className='text-white hidden uppercase cursor-pointer' to="/connexion">se connecter</Link>
               <div className='flex relative z-50 cursor-pointer items-center space-x-3 parent bg-white rounded-md border-[1.75px] border-[#FF3E79] p-1.5'>
@@ -124,10 +131,10 @@ export default class header extends Component {
                 <div className="hidden absolute right-0 child bg-white top-10 w-64 space-y-3 rounded-xl shadow-xl py-2">
                   {
                     this.menu3.map(item => 
-                      <div className="flex items-center space-x-5 pl-5 cursor-pointer">
+                      <NavLink key={item.nom} className="flex items-center space-x-5 pl-5 cursor-pointer" to={"/" + item.to}>
                         <img src={item.img} alt="" />
                         <div className="">{item.nom}</div>
-                      </div>
+                      </NavLink>
                     )
                   }
                   <div className='border-[1px] border-[#FF3E79] my-3'></div>
@@ -140,7 +147,7 @@ export default class header extends Component {
               <div className="flex lg:space-x-7 md:space-x-3 items-center text-white uppercase md:text-center justify-center">
                 {
                   this.menu2.map(item =>
-                    <div className="cursor-pointer">{item}</div>
+                    <div key={item} className="cursor-pointer">{item}</div>
                   )
                 }
               </div>
